@@ -1,0 +1,35 @@
+<div style="max-width: 900px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="font-size: 2.5rem; text-align: center; color: #333; margin-bottom: 20px;">Account Management</h1>
+    <p style="font-size: 1.25rem; color: #555;">This section can only be accessed by administrators. All accounts from secure API end point:</p>
+    
+    <a routerLink="add" style="display: inline-block; font-size: 1.25rem; padding: 10px 20px; color: white; background-color: #28a745; border-radius: 5px; text-decoration: none; margin-bottom: 20px;">Create Account</a>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead style="background-color: #f8f9fa;">
+            <tr>
+                <th style="width: 25%; padding: 15px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.25rem;">Name</th>
+                <th style="width: 25%; padding: 15px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.25rem;">Email</th>
+                <th style="width: 20%; padding: 15px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.25rem;">Role</th>
+                <th style="width: 30%; padding: 15px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.25rem;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let account of accounts" style="border-bottom: 1px solid #dee2e6;">
+                <td style="padding: 15px; font-size: 1.25rem; color: #333;">{{ account.title }} {{ account.firstName }} {{ account.lastName }}</td>
+                <td style="padding: 15px; font-size: 1.25rem; color: #333;">{{ account.email }}</td>
+                <td style="padding: 15px; font-size: 1.25rem; color: #333;">{{ account.role }}</td>
+                <td style="padding: 15px; white-space: nowrap;">
+                    <a routerLink="edit/{{ account.id }}" style="display: inline-block; font-size: 1rem; padding: 8px 12px; color: white; background-color: #007bff; border-radius: 5px; text-decoration: none; margin-right: 5px;">Edit</a>
+                    <button (click)="deleteAccount(account.id)" [disabled]="account.isDeleting" style="display: inline-block; font-size: 1rem; padding: 8px 12px; color: white; background-color: #dc3545; border-radius: 5px; border: none; cursor: pointer;">
+                        <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
+                        <span *ngIf="!account.isDeleting">Delete</span>
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="!accounts">
+                <td colspan="4" style="text-align: center; padding: 20px; font-size: 1.25rem; color: #555;">
+                    <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
